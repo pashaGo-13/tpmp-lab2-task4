@@ -1,3 +1,4 @@
+// pashaGo
 #ifndef MILITARY_H
 #define MILITARY_H
 
