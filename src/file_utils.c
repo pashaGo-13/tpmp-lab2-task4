@@ -83,3 +83,36 @@ int read_servicemen_from_file(const char *filename, Serviceman *servicemen, int 
     return count;
 }
 
+int write_servicemen_to_file(const char *filename, const Serviceman *servicemen, int count) {
+    FILE *file = fopen(filename, "w");
+    if (!file) {
+        printf("Ошибка открытия файла %s для записи\n", filename);
+        return -1;
+    }
+    fprintf(file, "Фамилия;Имя;Отчество;Страна;Область;Район;Город;Улица;Дом;Квартира;Индекс;Национальность;Год;Месяц;День;Должность;Звание\n");
+    
+    for(int i = 0; i < count; i++) {
+        const Serviceman *sm = &servicemen[i];
+        fprintf(file, "%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%s;%d;%d;%d;%s;%s\n",
+                sm->surname,
+                sm->name,
+                sm->patronymic,
+                sm->address.country,
+                sm->address.region,
+                sm->address.district,
+                sm->address.city,
+                sm->address.street,
+                sm->address.house,
+                sm->address.apartment,
+                sm->address.postal_code,
+                sm->nationality,
+                sm->birth_year,
+                sm->birth_month,
+                sm->birth_day,
+                sm->position,
+                sm->rank);
+    }
+    
+    fclose(file);
+    return count;
+}
