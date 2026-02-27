@@ -5,6 +5,7 @@
 #define MAX_STRING 100
 #define MAX_ADDRESS 256
 #define MAX_RECORDS 100
+#define EXPECTED_FIELDS 17
 
 typedef struct {
     char country[MAX_STRING];
@@ -28,11 +29,13 @@ typedef struct {
     int birth_day;
     char position[MAX_STRING];
     char rank[MAX_STRING];
+    int is_valid;
 } Serviceman;
 
 void init_serviceman(Serviceman *sm);
 void print_serviceman(const Serviceman *sm);
-int is_lieutenant(const Serviceman *sm);
+int is_exact_lieutenant(const Serviceman *sm);
+int validate_serviceman(const Serviceman *sm);
 
 int read_servicemen_from_file(const char *filename, Serviceman *servicemen, int max_count);
 int write_servicemen_to_file(const char *filename, const Serviceman *servicemen, int count);
